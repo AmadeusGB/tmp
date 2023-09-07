@@ -8,7 +8,7 @@
 
 ---
 
-The Deeper Network is pleased to announce the introduction of ADSC (Advertising System Points), a groundbreaking initiative engineered to transform the conventional paradigms of online advertising. As an indispensable component of the Deeper Network ecosystem, ADSC is designed to address the intrinsic limitations of traditional advertising frameworks by harnessing the power of decentralized technologies.
+The Deeper Network is pleased to announce the introduction of ADSC (Advertising Decentralized System Credit), a groundbreaking initiative engineered to transform the conventional paradigms of online advertising. As an indispensable component of the Deeper Network ecosystem, ADSC is designed to address the intrinsic limitations of traditional advertising frameworks by harnessing the power of decentralized technologies.
 
 ---
 
