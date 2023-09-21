@@ -19,5 +19,5 @@ ADSC's collaboration with Deeper Network will focus on **advancing blockchain-ba
 
 #### **For media inquiries, please contact:**  
 **Contact Person**: Eric Ma  
-**Email Address**: information@deeper.network  
+**Email Address**: eric.ma@deeper.network  
 **Website**: [https://www.deeper.network/](https://www.deeper.network/)
