@@ -89,7 +89,8 @@
 ### 6. 获取通用账户列表
 - **接口**: `POST /api/deeperWallet/keystoreCommonAccounts`
 - **描述**: 获取钱包中的通用账户列表。
-- **输入参数**: 无
+- **输入参数**: 
+    - `walletId`: 钱包ID
 - **输出参数**:
   ```json
   {
@@ -199,7 +200,9 @@
 ### 10. 获取余额
 - **接口**: `POST /api/deeperWallet/getBalance`
 - **描述**: 获取钱包余额。
-- **输入参数**: 无
+- **输入参数**:
+  - `address`: 钱包地址
+  - `chainType`: 链类型
 - **输出参数**:
   ```json
   {
@@ -213,7 +216,8 @@
 ### 11. 获取代币价格
 - **接口**: `POST /api/deeperWallet/getPrice`
 - **描述**: 获取指定代币的当前市场价格。
-- **输入参数**: 无
+- **输入参数**:
+  - `tokenName`: 代币名称
 - **输出参数**:
   ```json
   {
@@ -252,10 +256,16 @@
   }
   ```
 
-### 14. 发送交易
-- **接口**: `POST /api/deeperWallet/sendTransaction`
-- **描述**: 发送交易。
-- **输入参数**: 无
+### 14. 转移以太坊
+- **接口**: `POST /api/deeperWallet/transferEth`
+- **描述**: 转移以太坊。
+- **输入参数**:
+  - `id`: ID
+  - `password`: 密码
+  - `fromAddress`: 发送地址
+  - `toAddress`: 接收地址
+  - `amount`: 转移数量
+  - `network`: 网络类型
 - **输出参数**:
   ```json
   {
