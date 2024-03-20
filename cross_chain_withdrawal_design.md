@@ -9,7 +9,7 @@
 
 #### 1. 查询跨链申请接口
 
-- **路径**：`/api/withdrawal_requests`
+- **路径**：`/deeper/cross_chain_requests`
 - **方法**：`GET`
 - **输入参数**：
   - `block_id`：客户端上次查询的最后一个区块号。类型为整数。
@@ -42,7 +42,7 @@
 
 #### 2. 轻量级检查接口
 
-- **路径**：`/api/has_new_withdrawal`
+- **路径**：`/api/has_new_cross_chain`
 - **方法**：`GET`
 - **输入参数**：
   - `block_id`：客户端上次查询的最后一个区块号。类型为整数。
@@ -51,7 +51,7 @@
 **示例响应**：
 ```json
 {
-  "has_new_events": true
+  "has_new_cross_chain_events": true
 }
 ```
 
