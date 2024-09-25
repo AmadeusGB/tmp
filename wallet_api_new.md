@@ -80,7 +80,7 @@
 - **接口**: `GET /api/deeperWallet/getCurrencyExchangeRates`
 - **描述**: 获取指定代币的当前汇率。
 - **输入参数**:
-  - `tokenName`: 代币名称（作为查询参数）
+  - `currency`: 货币名称（作为查询参数）
 - **支持的货币**:
   USD, AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BRL, BSD, BTN, BWP, BYN, BZD, CAD, CDF, CHF, CLP, CNY, COP, CRC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, FOK, GBP, GEL, GGP, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, IMP, INR, IQD, IRR, ISK, JEP, JMD, JOD, JPY, KES, KGS, KHR, KID, KMF, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLE, SLL, SOS, SRD, SSP, STN, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TVD, TWD, TZS, UAH, UGX, UYU, UZS, VES, VND, VUV, WST, XAF, XCD, XDR, XOF, XPF, YER, ZAR, ZMW, ZWL
 - **输出参数**:
@@ -95,7 +95,7 @@
 
 注意：
 1. 返回的汇率值可能会根据市场实时变化。此处的 1.54 仅为示例值。
-2. `tokenName` 参数应该是上述支持的货币之一。
+2. `currency` 参数应该是上述支持的货币之一。
 3. 汇率可能是相对于某个基准货币（如 USD）的值，具体取决于 API 的实现。
 
 ### 6. 获取代币列表
