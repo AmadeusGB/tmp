@@ -74,7 +74,7 @@
   ```
 
 ### 5. 获取货币汇率
-- **接口**: `GET /api/deeperWallet/getCurrencyExchangeRates`
+- **接口**: `GET /api/deeperWallet/currencyExchangeRates`
 - **描述**: 获取指定代币的当前汇率。
 - **输入参数**:
   - `currency`: 货币名称（作为查询参数）
@@ -176,7 +176,7 @@
 3. 输入参数 `address` 和 `chainType` 都是必需的。
 
 ### 8. 获取钱包信息
-- **接口**: `GET /api/deeperWallet/getWalletInfo`
+- **接口**: `GET /api/deeperWallet/walletInfo`
 - **描述**: 获取钱包首次登录时的账户名称列表和每个账户下配置的区块链网络列表。
 - **输入参数**: 无
 - **输出参数**:
@@ -210,7 +210,7 @@
 2. 如果进入页面时，缓存的 account 和 network 非空，则不需要调用这个接口。
 
 ### 9. 获取钱包名称
-- **接口**: `GET /api/deeperWallet/getWalletName`
+- **接口**: `GET /api/deeperWallet/walletName`
 - **描述**: 获取钱包名称，用于在 dashboard 页面显示。
 - **输入参数**: 无
 - **输出参数**:
@@ -228,7 +228,7 @@
 2. 页面显示逻辑为：钱包名称 - 账户名称，例如：Ghost Assassin - Account 01。
 
 ### 10. 获取地址
-- **接口**: `GET /api/deeperWallet/getAddress`
+- **接口**: `GET /api/deeperWallet/fetchAddress`
 - **描述**: 获取当前账户和网络对应的地址。
 - **输入参数**:
   - `index`: 账户索引
