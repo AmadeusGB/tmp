@@ -58,13 +58,14 @@
   }
   ```
 
-### 4. 添加地址
-- **接口**: `POST /api/deeperWallet/addAddress`
+### 4. 添加账户
+- **接口**: `POST /api/deeperWallet/addAccount`
 - **描述**: 为指定的密钥库添加一个新的地址。
 - **输入参数**:
   - `id`: 密钥库ID
   - `password`: 加密后的密码
   - `chains`: 要添加地址的链数组，例如：`["Base", "Arbitrum", "Ethereum", "Bitcoin", "Tron"]`
+  - `index`: 账户索引
 - **输出参数**:
   ```json
   {
@@ -101,17 +102,17 @@
   - `network`: 网络名称（作为查询参数）
   - `address`: 钱包地址（作为查询参数）
 - **支持的网络**:
-  - BITCOINCHAIN-MAINNET
-  - BITCOINCHAIN-TESTNET
+  - BITCOIN
+  - BITCOIN-TESTNET
   - ETHEREUM
-  - SEPOLIA
-  - BNBSMARTCHAIN-MAINNET
+  - ETHEREUM-SEPOLIA
+  - BNBSMARTCHAIN
   - BNBSMARTCHAIN-TESTNET
-  - SOLANACHAIN-MAINNET
-  - SOLANACHAIN-TESTNET
-  - SOLANACHAIN-DEVNET
+  - SOLANA
+  - SOLANA-TESTNET
+  - SOLANA-DEVNET
 - **示例**: 
-  对于 `network=BITCOINCHAIN-MAINNET`
+  对于 `network=BITCOIN`
 - **输出参数**:
   ```json
   {
@@ -186,14 +187,17 @@
       "accounts": [
         {
           "name": "Account 01",
+          "index": 1,
           "supportedNetworks": ["Bitcoin", "ETHEREUM"]
         },
         {
           "name": "Account 02",
+          "index": 2,
           "supportedNetworks": ["ETHEREUM", "SOLANA"]
         },
         {
           "name": "Account 03",
+          "index": 3,
           "supportedNetworks": ["Bitcoin", "ETHEREUM", "SOLANA"]
         }
       ]
@@ -227,7 +231,7 @@
 - **接口**: `GET /api/deeperWallet/getAddress`
 - **描述**: 获取当前账户和网络对应的地址。
 - **输入参数**:
-  - `account`: 账户名称（字符串）
+  - `index`: 账户索引
   - `network`: 网络名称（字符串）
 - **输出参数**:
   ```json
@@ -278,3 +282,8 @@
 4. 此接口用于支持 V2 硬件钱包的编辑钱包名称功能。
 5. 成功重命名后，新的钱包名称将在 walletDetail 页面显示。
 
+
+editAddress
+- `index`: 账户索引
+
+deleteAddress
