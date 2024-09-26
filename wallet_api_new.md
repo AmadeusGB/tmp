@@ -68,11 +68,7 @@
 - **输出参数**:
   ```json
   {
-    "success": true,
-    "data": {
-      "address": "0xB9041f89c9399F3101e8E5456b90217d67f7252A",
-      "name": "Account3"
-    }
+    "success": true
   }
   ```
 
