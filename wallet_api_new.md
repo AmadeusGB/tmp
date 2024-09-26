@@ -178,46 +178,7 @@
 2. `decimal` 字段表示余额的小数位数，客户端应使用这个值来正确显示余额。
 3. 输入参数 `address` 和 `chainType` 都是必需的。
 
-### 8. 获取代币列表
-- **接口**: `GET /api/deeperWallet/tokenList`
-- **描述**: 获取特定地址在特定网络上的所有代币列表，包括主币。
-- **输入参数**:
-  - `network`: 网络类型（字符串）
-  - `address`: 钱包地址（字符串）
-- **输出参数**:
-  ```json
-  {
-    "success": true,
-    "data": [
-      {
-        "contract_address": "",
-        "decimal": 18,
-        "symbol": "ETH",
-        "status": 1,
-        "balance": "1000000000000000000",
-        "name": "Ethereum"
-      },
-      {
-        "contract_address": "0x4D849Fa36CBdDADEAA3e2e5B0A4fc9f3e8DC6631",
-        "decimal": 18,
-        "symbol": "DPR",
-        "status": 0,
-        "balance": "10000000000000000000",
-        "name": "Deeper Network"
-      }
-    ]
-  }
-  ```
-
-注意：
-1. 返回的数组包含所有相关代币的信息，包括主币（如ETH）。
-2. 对于主币，`contract_address` 为空字符串。
-3. `balance` 字段是字符串形式的原始余额，未经过小数点处理。
-4. `status` 字段表示代币的显示状态（0表示隐藏，1表示显示）。
-5. 输入参数 `network` 和 `address` 都是必需的。
-6. 实际返回可能包含更多代币，这里只显示了两个作为示例。
-
-### 9. 获取钱包信息
+### 8. 获取钱包信息
 - **接口**: `GET /api/deeperWallet/getWalletInfo`
 - **描述**: 获取钱包首次登录时的账户名称列表和每个账户下配置的区块链网络列表。
 - **输入参数**: 无
@@ -248,7 +209,7 @@
 1. 此接口通常在首次登录时调用。
 2. 如果进入页面时，缓存的 account 和 network 非空，则不需要调用这个接口。
 
-### 10. 获取钱包名称
+### 9. 获取钱包名称
 - **接口**: `GET /api/deeperWallet/getWalletName`
 - **描述**: 获取钱包名称，用于在 dashboard 页面显示。
 - **输入参数**: 无
@@ -266,7 +227,7 @@
 1. 此接口用于支持 V2 硬件钱包新增的编辑钱包名称功能。
 2. 页面显示逻辑为：钱包名称 - 账户名称，例如：Ghost Assassin - Account 01。
 
-### 11. 获取地址
+### 10. 获取地址
 - **接口**: `GET /api/deeperWallet/getAddress`
 - **描述**: 获取当前账户和网络对应的地址。
 - **输入参数**:
@@ -287,7 +248,7 @@
 2. 如果提供的账户或网络不存在，返回的地址将是空字符串。
 3. 示例中的地址已经被截断，实际返回的地址将是完整的。
 
-### 12. 重命名钱包
+### 11. 重命名钱包
 - **接口**: `POST /api/deeperWallet/renameWallet`
 - **描述**: 重命名当前钱包。
 - **输入参数**:
