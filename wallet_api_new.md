@@ -58,22 +58,7 @@
   }
   ```
 
-### 4. 添加账户
-- **接口**: `POST /api/deeperWallet/addAccount`
-- **描述**: 为指定的密钥库添加一个新的地址。
-- **输入参数**:
-  - `id`: 密钥库ID
-  - `password`: 加密后的密码
-  - `chains`: 要添加地址的链数组，例如：`["Base", "Arbitrum", "Ethereum", "Bitcoin", "Tron"]`
-  - `index`: 账户索引
-- **输出参数**:
-  ```json
-  {
-    "success": true
-  }
-  ```
-
-### 5. 获取货币汇率
+### 4. 获取货币汇率
 - **接口**: `GET /api/deeperWallet/currencyExchangeRates`
 - **描述**: 获取指定代币的当前汇率。
 - **输入参数**:
@@ -95,7 +80,7 @@
 2. `currency` 参数应该是上述支持的货币之一。
 3. 汇率可能是相对于某个基准货币（如 USD）的值，具体取决于 API 的实现。
 
-### 6. 获取代币列表
+### 5. 获取代币列表
 - **接口**: `GET /api/deeperWallet/tokenList`
 - **描述**: 获取指定网络的代币列表，包括余额和价格信息。
 - **输入参数**:
@@ -153,7 +138,7 @@
 5. 返回的代币列表可能会根据不同的网络而变化。
 6. 实际返回可能包含更多或更少的代币，取决于用户的钱包内容和网络状态。
 
-### 7. 获取余额
+### 6. 获取余额
 - **接口**: `GET /api/deeperWallet/balance`
 - **描述**: 获取特定地址在特定链上的余额。
 - **输入参数**:
@@ -175,7 +160,7 @@
 2. `decimal` 字段表示余额的小数位数，客户端应使用这个值来正确显示余额。
 3. 输入参数 `address` 和 `chainType` 都是必需的。
 
-### 8. 获取钱包信息
+### 7. 获取钱包信息
 - **接口**: `GET /api/deeperWallet/walletInfo`
 - **描述**: 获取钱包首次登录时的账户名称列表和每个账户下配置的区块链网络列表。
 - **输入参数**: 无
@@ -209,7 +194,7 @@
 1. 此接口通常在首次登录时调用。
 2. 如果进入页面时，缓存的 account 和 network 非空，则不需要调用这个接口。
 
-### 9. 获取钱包名称
+### 8. 获取钱包名称
 - **接口**: `GET /api/deeperWallet/walletName`
 - **描述**: 获取钱包名称，用于在 dashboard 页面显示。
 - **输入参数**: 无
@@ -227,7 +212,7 @@
 1. 此接口用于支持 V2 硬件钱包新增的编辑钱包名称功能。
 2. 页面显示逻辑为：钱包名称 - 账户名称，例如：Ghost Assassin - Account 01。
 
-### 10. 获取地址
+### 9. 获取地址
 - **接口**: `GET /api/deeperWallet/fetchAddress`
 - **描述**: 获取指定账户索引下所有支持网络的地址。
 - **输入参数**:
@@ -252,7 +237,7 @@
 5. 网络名称作为键，是大写的，如 "BITCOIN", "ETHEREUM", "SOLANA" 等。
 6. 示例中的以太坊地址已被截断，实际返回的地址将是完整的。
 
-### 11. 重命名钱包
+### 10. 重命名钱包
 - **接口**: `POST /api/deeperWallet/renameWallet`
 - **描述**: 重命名当前钱包。
 - **输入参数**:
@@ -286,8 +271,43 @@
 4. 此接口用于支持 V2 硬件钱包的编辑钱包名称功能。
 5. 成功重命名后，新的钱包名称将在 walletDetail 页面显示。
 
+### 11. 获取钱包注释信息
+- **接口**: `GET /api/deeperWallet/walletNote`
+- **描述**: 获取钱包的标识符和来源信息。
+- **输入参数**: 无
+- **输出参数**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "identifier": "Im14x5C7fgFVHAEtDHAGaFMDgT9htCBCFd6AfW5",
+      "source": "Import via mnemonic phrase"
+    }
+  }
+  ```
 
-editAddress
+### 12. 添加账户
+- **接口**: `POST /api/deeperWallet/addAccount`
+- **描述**: 为指定的密钥库添加一个新的地址。
+- **输入参数**:
+  - `id`: 密钥库ID
+  - `password`: 加密后的密码
+  - `chains`: 要添加地址的链数组，例如：`["Base", "Arbitrum", "Ethereum", "Bitcoin", "Tron"]`
+- **输出参数**:
+  ```json
+  {
+    "success": true
+  }
+  ```
+
+注意：
+1. `identifier` 字段是钱包的唯一标识符，可能是生成或导入的 Keystore 文件名的哈希值。
+2. `source` 字段描述了钱包的创建或导入方式，例如 "Import via mnemonic phrase"（通过助记词导入）。
+3. 这个接口可以用于显示钱包的额外信息，如在设置或详情页面中。
+4. 实际的 `identifier` 和 `source` 值可能会根据钱包的创建或导入方式而变化。
+
+editAccount
 - `index`: 账户索引
 
-deleteAddress
+deleteAccount
+- `index`: 账户索引
