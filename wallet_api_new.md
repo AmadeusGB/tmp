@@ -316,7 +316,10 @@
   成功情况:
   ```json
   {
-    "success": true
+    "success": true,
+    "data": {
+      "name": "My Savings Account"
+    }
   }
   ```
   失败情况:
