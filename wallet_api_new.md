@@ -231,7 +231,7 @@
 
 注意：
 1. 返回的 `data` 对象包含了该账户索引下所有支持网络的地址。
-2. 不同网络对应的地址格式或类型可能完全不同。
+2. 不同网络对应的地址��式或类型可能完全不同。
 3. 如果某个网络不在于指定的账户索引下，该网络将不会出现在返回的数据中。
 4. 账户索引是字符串类型，例如 "1", "2", "3" 等。
 5. 网络名称作为键，是大写的，如 "BITCOIN", "ETHEREUM", "SOLANA" 等。
@@ -363,3 +363,67 @@
 3. 如果尝试删除不存在的账户，密码验证失败，或删除操作失败，将返回 `{ "success": false }`。
 4. 删除账户不会影响该账户在区块链上的任何资产或交易历史。用户应在删除前确保已备份私钥或助记词。
 5. 建议在用户界面中清晰地说明删除账户的影响和不可逆性。
+
+### 15. 导出Keystore
+- **接口**: `GET /api/deeperWallet/exportKeystore`
+- **描述**: 导出当前钱包的keystore信息。这个keystore包含了钱包的基本信息，但不包含私钥。
+- **输入参数**: 无
+- **输出参数**:
+  成功情况:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "id": "some-id",
+      "name": "deeper",
+      "source": "MNEMONIC",
+      "accounts": [],
+      "created_at": 1634567890123
+    }
+  }
+  ```
+  失败情况:
+  ```json
+  {
+    "success": false,
+    "error": "Failed to export keystore"
+  }
+  ```
+
+注意：
+1. 这个接口不需要输入参数，直接返回当前钱包的keystore信息。
+2. 返回的keystore不包含私钥信息，只包含钱包的基本元数据。
+3. `created_at` 字段是一个Unix时间戳，表示钱包创建的时间。
+4. `accounts` 数组在这个示例中是空的，实际使用时可能包含账户信息。
+
+### 16. 导出私钥
+- **接口**: `POST /api/deeperWallet/exportPrivateKey`
+- **描述**: 导出指定账户的加密私钥。
+- **输入参数**:
+  - `password`: 加密后的用户密码（用于解密私钥）
+- **输出参数**:
+  成功情况:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "id": "038e53b5-06a0-4835-943c-ec4195f2beed",
+      "type": 1,
+      "value": "BgNiwxqgPoTZPVsli44egte+HnCmK5rdp0W9xioI0I9qf/UsH5/+9yvjwNHWtDoQJ93YDmIBqY/m0p04hVyA7g==,f+DrgtTnw1HdV92S92XmpKI5FxGJau2XjhWNYxL0uNlpzGem1+SPMIcoI8W6uNltptKH9a1JZA3MFWf5hK9Pfw==,flLYe7pxdZpSWpln1/lsJ/DZuuNk3Mh2nWoSk40mQ86JZAygIQEd1WlEd9DInqrB/VgwP/YIStdC5PU+hx2FsA=="
+    }
+  }
+  ```
+  失败情况:
+  ```json
+  {
+    "success": false,
+    "error": "Invalid password or failed to export private key"
+  }
+  ```
+
+注意：
+1. 这个接口需要用户提供密码作为输入参数，用于验证用户身份和解密私钥。
+2. 返回的私钥是加密的，`value` 字段包含了加密后的私钥数据。
+3. `type` 字段可能表示私钥的类型或加密方式。
+4. 导出私钥是一个敏感操作，应该警告用户保护好导出的私钥信息。
+5. 在实际应用中，建议对密码进行加密后再传输，以增加安全性。
