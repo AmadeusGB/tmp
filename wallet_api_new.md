@@ -231,7 +231,7 @@
 
 注意：
 1. 返回的 `data` 对象包含了该账户索引下所有支持网络的地址。
-2. 不同网络对应的地址��式或类型可能完全不同。
+2. 不同网络对应的地址格式或类型可能完全不同。
 3. 如果某个网络不在于指定的账户索引下，该网络将不会出现在返回的数据中。
 4. 账户索引是字符串类型，例如 "1", "2", "3" 等。
 5. 网络名称作为键，是大写的，如 "BITCOIN", "ETHEREUM", "SOLANA" 等。
@@ -366,7 +366,7 @@
 
 ### 15. 导出Keystore
 - **接口**: `GET /api/deeperWallet/exportKeystore`
-- **描述**: 导出当前钱包的keystore信息。这个keystore包含了钱包的基本信息，但不包含私钥。
+- **描述**: 导出当前钱包的keystore信息。这个keystore包含了钱包的加密信息和元数据。
 - **输入参数**: 无
 - **输出参数**:
   成功情况:
@@ -374,11 +374,31 @@
   {
     "success": true,
     "data": {
-      "id": "some-id",
-      "name": "deeper",
-      "source": "MNEMONIC",
-      "accounts": [],
-      "created_at": 1634567890123
+      "id": "keystore",
+      "version": 11001,
+      "keyHash": "5e74c32febd46b87e129a6134b08cfd90f8a0dc3",
+      "crypto": {
+        "cipher": "aes-128-ctr",
+        "cipherparams": {
+          "iv": "f6961bf743637756ac736b8b67438dc5"
+        },
+        "ciphertext": "48301657adf34582ceec5fe590dfa144f2b6fb734869ba69195c8b8d4556b02f",
+        "kdf": "pbkdf2",
+        "kdfparams": {
+          "c": 262144,
+          "prf": "hmac-sha256",
+          "dklen": 32,
+          "salt": "9719b9e536beeaedd63cb9a7560ebdb8cfbcd3e901fc6b5f1f2145d357a02bfd"
+        },
+        "mac": "803ab9246a1f8b339eaf5f92740107e5a88428eab39ff88976a414e8b61704a3"
+      },
+      "activeAccounts": [],
+      "DeeperTokenMeta": {
+        "name": "deeper",
+        "passwordHint": "deeper",
+        "timestamp": 1727378576,
+        "source": "PRIVATE"
+      }
     }
   }
   ```
@@ -391,10 +411,15 @@
   ```
 
 注意：
-1. 这个接口不需要输入参数，直接返回当前钱包的keystore信息。
-2. 返回的keystore不包含私钥信息，只包含钱包的基本元数据。
-3. `created_at` 字段是一个Unix时间戳，表示钱包创建的时间。
-4. `accounts` 数组在这个示例中是空的，实际使用时可能包含账户信息。
+1. 这个接口不需要输入参数，直接返回当前钱包的完整keystore信息。
+2. 返回的keystore包含加密的私钥信息和其他元数据。
+3. `crypto` 对象包含了用于加密和解密私钥的必要信息。
+4. `keyHash` 是私钥的哈希值，用于验证私钥的完整性。
+5. `activeAccounts` 数组在这个示例中是空的，实际使用时可能包含活跃账户的信息。
+6. `DeeperTokenMeta` 包含了一些额外的元数据，如钱包名称、密码提示和创建时间戳。
+7. `version` 字段表示keystore的版本号，可用于兼容性检查。
+8. 导出的keystore信息非常敏感，应警告用户妥善保管，不要泄露给他人。
+9. 在实际应用中，可能需要额外的身份验证步骤来确保只有授权用户可以导出keystore。
 
 ### 16. 导出私钥
 - **接口**: `POST /api/deeperWallet/exportPrivateKey`
