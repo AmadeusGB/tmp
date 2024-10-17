@@ -497,3 +497,64 @@
 6. `price` 字段表示每单位代币的美元价格。
 7. 实际返回的代币列表可能会根据不同的网络和地址而变化。
 8. 此接口返回的是默认代币列表，可能包含用户没有余额的代币。
+
+### 18. 获取交易历史
+- **接口**: `GET /api/deeperWallet/txHistory`
+- **描述**: 获取指定网络的交易历史记录。
+- **输入参数**: 
+  - `network`: 网络类型（作为查询参数，例如 'BITCOIN', 'ETHEREUM', 'BNBSMARTCHAIN', 'SOLANA'）
+- **输出参数**:
+  ```json
+  {
+    "success": true,
+    "data": [
+      {
+        "type": "Send",
+        "amount": "120000000",
+        "tx_id": "0xf3736a0021a71f7d8b571704220aa946a6934a12f6eb87dfdbaa6c0725563de8",
+        "timestamp": 1712687619962,
+        "block_number": 770003
+      },
+      {
+        "type": "Receive",
+        "amount": "80000000",
+        "tx_id": "0x0358d08918c285ad2839a2e5d0847ada217c8006942f00fc81250c855b834664",
+        "timestamp": 1712688519962,
+        "block_number": 770004
+      },
+      {
+        "type": "Send",
+        "amount": "50000000",
+        "tx_id": "0xf029555b36811ba9c1d28c2840d2510813111aa115e6d7b380de894472ef9c0d",
+        "timestamp": 1712774019962,
+        "block_number": 770005
+      },
+      {
+        "type": "Receive",
+        "amount": "150000000",
+        "tx_id": "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+        "timestamp": 1712774919962,
+        "block_number": 770006
+      }
+    ]
+  }
+  ```
+
+注意：
+1. `network` 参数是必需的，用于指定要查询的网络类型。支持的网络包括 'BITCOIN', 'ETHEREUM', 'BNBSMARTCHAIN', 'SOLANA'。
+2. 交易类型 `type` 可以是 "Send" 或 "Receive"。
+3. `amount` 字段表示交易金额，以该网络的最小单位表示：
+   - BITCOIN: satoshis (1 BTC = 100,000,000 satoshis)
+   - ETHEREUM: wei (1 ETH = 1,000,000,000,000,000,000 wei)
+   - BNBSMARTCHAIN: wei (1 BNB = 1,000,000,000,000,000,000 wei)
+   - SOLANA: lamports (1 SOL = 1,000,000,000 lamports)
+4. `tx_id` 是交易的唯一标识符（交易哈希）。
+5. `timestamp` 是交易发生的时间戳（毫秒）。
+6. `block_number` 表示交易被包含在哪个区块中。每个网络的起始区块号不同：
+   - BITCOIN: 从约 770,000 开始
+   - ETHEREUM: 从约 16,800,000 开始
+   - BNBSMARTCHAIN: 从约 26,800,000 开始
+   - SOLANA: 从约 178,900,000 开始
+7. 返回的交易记录按时间倒序排列，最新的交易在前。
+8. 当前实现返回固定的 4 条交易记录。在实际应用中，可能需要添加分页功能以处理大量交易记录。
+9. 如果提供了不支持的网络类型，将返回空的交易列表。
