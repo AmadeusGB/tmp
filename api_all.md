@@ -1000,7 +1000,7 @@
   "success": true,
   "data": {
     "identifier": "Im14x5C7fgFVHAEtDHAGaFMDgT9htCBCFd6AfW5",
-    "source": "Import via mnemonic phrase"
+    "source": 1
   }
 }
 ```
@@ -1008,11 +1008,14 @@
 ### 字段说明
 - `success`: 布尔值，表示操作是否成功
 - `data.identifier`: 字符串，钱包的唯一标识符
-- `data.source`: 字符串，钱包的来源或创建方式
+- `data.source`: 整数，钱包的来源类型
+  - `0`: 系统创建 (Created by system)
+  - `1`: 通过助记词创建 (Created by mnemonic)
+  - `2`: 通过导入文件创建 (Created by import file)
 
 ### 注意事项
 - 标识符应该是唯一的，可用于区分不同的钱包
-- 来源信息可以帮助用户回忆钱包的创建方式
+- `source` 字段是一个枚举值，用于标识钱包的创建方式
 - 这些信息通常用于显示目的，不应包含敏感数据
 
 ---
